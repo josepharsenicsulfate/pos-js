@@ -1,0 +1,7 @@
+Point of sales (1-week js proj)
+
+* numpad barcode encoder
+* receipt generator
+* json local storage (for generated receipt)
+* printable receipt (pdf)
+* inventory? (at least for qty and prod list)

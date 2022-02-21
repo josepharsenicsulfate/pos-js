@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- js -->
+    <script src="script.js"></script>
+</head>
+<body>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr);">
+        <div style="padding: 10%; text-align: center;">
+            <div style="border: 1px solid black; width: 1fr; text-align: center; height: 70vh; overflow: scroll;">
+                <h1>Lorem, ipsum dolor.</h1>
+                <p></p>
+            </div>
+            <button>print</button>
+        </div>
+        <div style="padding: 10%; text-align: center;">
+            <div style="border: 1px solid black; height: 10%;">
+                <p id="product"></p>
+                <p id="quantity"></p>
+                <p id="code"></p>
+            </div>
+            <div style="margin: 15px 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(5, 1fr); gap: 5px">
+
+                <button class="btn numpad">0</button>
+                
+                <button class="btn numpad">1</button>
+                <button class="btn numpad">2</button>
+                <button class="btn numpad">3</button>
+
+                <button class="btn numpad">4</button>
+                <button class="btn numpad">5</button>
+                <button class="btn numpad">6</button>
+
+                <button class="btn numpad">7</button>
+                <button class="btn numpad">8</button>
+                <button class="btn numpad">9</button>
+
+                <button class="btn numpad">.</button>
+                <button class="btn numpad">qty</button>
+                <button class="btn numpad">c</button>
+                <button class="btn numpad">enter</button>
+
+                <button class="btn numpad">^</button>
+                <button class="btn numpad">v</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
