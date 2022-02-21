@@ -35,7 +35,6 @@ window.addEventListener("DOMContentLoaded", function(){
     let code = ""
 
     for(let i = 0; i < buttons.length; i++){
-
         // click event listener for numpad
         buttons[i].addEventListener("click", function(){
             if(buttons[i].innerHTML == "c"){
@@ -58,8 +57,13 @@ window.addEventListener("DOMContentLoaded", function(){
             document.getElementById("code").innerHTML = code
         })
     }
-    console.log(buttons)
 })
+
+window.addEventListener("keydown", (event) => {
+    const keyName = event.key
+
+    console.log(keyName)
+}, false)
 
 function getProd(code){
 
