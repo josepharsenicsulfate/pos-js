@@ -2,28 +2,46 @@
 // default values for testing
 const products = [
     {
-        id: 0,
+        id: 0000,
         name: "soup",
         price: 5.00,
-        category: "food"
+        category: "food",
+        qty: 1
     },
     {
-        id: 1,
+        id: 0001,
         name: "beans",
         price: 3.00,
-        category: "food"
+        category: "food",
+        qty: 1
     },
     {
-        id: 2,
+        id: 0002,
         name: "chips",
         price: 2.00,
-        category: "food"
+        category: "food",
+        qty: 1
     },    
     {
-        id: 3,
+        id: 0003,
         name: "soda",
         price: 1.00,
-        category: "drinks"
+        category: "drinks",
+        qty: 1
+    },
+    {
+        id: 0004,
+        name: "kusa",
+        price: 10.00,
+        category: "plant",
+        qty: 1
+    },
+    {
+        id: 0010,
+        name: "krazy",
+        price: 6.00,
+        category: "dairy",
+        qty: 1
     }
 ]
 
@@ -33,8 +51,12 @@ window.addEventListener("DOMContentLoaded", function(){
     // getting numpad elements
     let buttons = document.getElementsByClassName("numpad")
     let code = ""
+    let price = 0
+    let cart = []
+    let curr
 
     for(let i = 0; i < buttons.length; i++){
+
         // click event listener for numpad
         buttons[i].addEventListener("click", function(){
             if(buttons[i].innerHTML == "c"){
@@ -42,18 +64,17 @@ window.addEventListener("DOMContentLoaded", function(){
                 // deleting last character of string
                 code = code.slice(0, code.length-1)
 
-                // resetting fields
-                document.getElementById("name").innerHTML = ""
-                document.getElementById("price").innerHTML = ""
             }else if(buttons[i].innerHTML == "enter"){
 
-                // getting values from list using code as index
-                getProd(code)
+                // pushing object to array as current selected item
+                curr = getProduct(code)
+                showProduct(curr)
             }else if(isDigit(buttons[i].innerHTML)){
 
                 // updating code(barcode) as user submits input
                 code = code.concat(buttons[i].innerHTML)
             }
+
             document.getElementById("code").innerHTML = code
         })
     }
@@ -66,19 +87,24 @@ window.addEventListener("DOMContentLoaded", function(){
             }else if(keyName == "Backspace"){
                 code = code.slice(0, code.length-1)
             }else if(keyName == "Enter"){
-                getProd(code)
+                curr = getProduct(code)
+                showProduct(curr)
             }
-        }
 
-        document.getElementById("code").innerHTML = code
+            document.getElementById("code").innerHTML = code
+        }
     }, false)
 })
 
-function getProd(code){
+function getProduct(code){
+    return products[products.findIndex(i => i.id == code)]
+}
 
-    // updating interface for product name and price
-    document.getElementById("name").innerHTML = products[code].name
-    document.getElementById("price").innerHTML = "$ " + products[code].price
+function showProduct(curr){
+    document.getElementById("name").innerHTML = curr.name
+    document.getElementById("price").innerHTML = "$" + curr.price
+    document.getElementById("quantity").innerHTML = curr.qty
+    document.getElementById("item-price").innerHTML = "$" + curr.price * curr.qty
 }
 
 function isDigit(char){
