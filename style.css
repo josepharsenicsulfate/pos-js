@@ -71,6 +71,11 @@ body .main .container .input-display :not(hr){
     padding-right: 18px;
 }
 
+body .main .container .input-display p{
+    display: inline;
+}
+
+
 body .main .container .input-keypad{
     margin: 15px 0; 
     display: grid; 

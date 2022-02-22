@@ -49,12 +49,18 @@ const products = [
         price: 1.00,
         category: "dairy",
         qty: 1
+    },
+    {
+        id: "042069",
+        name: "deez",
+        price: 1.00,
+        category: "nuts",
+        qty: 1
     }
 ]
 
 // onload
 window.addEventListener("DOMContentLoaded", function(){
-    console.log(products)
 
     // getting numpad elements
     let buttons = document.getElementsByClassName("numpad")
@@ -89,11 +95,14 @@ window.addEventListener("DOMContentLoaded", function(){
                 code = code.concat(buttons[i].innerHTML)
             }
 
+            // updating the code displayed for every button click
             document.getElementById("code").innerHTML = code
         })
     }
 
     document.addEventListener("keydown", (event) => {
+
+        // basic key listener "+" not working atm
         const keyName = event.key
         if(isKey(keyName)){
             if(isDigit(keyName)){
@@ -113,10 +122,13 @@ window.addEventListener("DOMContentLoaded", function(){
 })
 
 function getProduct(code){
+
+    // function to get the product object using code as reference
     return products[products.findIndex(i => i.id == code)]
 }
 
 function showProduct(curr){
+    // updating the right display to show current selected item
     document.getElementById("name").innerHTML = curr.name
     document.getElementById("price").innerHTML = "$" + curr.price
     document.getElementById("quantity").innerHTML = curr.qty
@@ -124,14 +136,17 @@ function showProduct(curr){
 }
 
 function previewReceipt(cart){
-    let target = document.getElementsByClassName("cart-items")
+
+    // adding html elements to DOM using cart content WIP
+    let target = document.getElementById("cart-items")
     let generatedElements = ""
 
-    cart.forEach(element => {
-        generatedElements += `<p>${element.name}</p>`
-    });
+    cart.map((data)=> {
+        generatedElements += `${data['name']}`
+    })
+    
 
-    target.innerHTML = generatedElements
+    target.textContent = generatedElements
 }
 
 function isDigit(char){
