@@ -2,44 +2,51 @@
 // default values for testing
 const products = [
     {
-        id: 0000,
+        id: "0000",
         name: "soup",
         price: 5.00,
         category: "food",
         qty: 1
     },
     {
-        id: 0001,
+        id: "0001",
         name: "beans",
         price: 3.00,
         category: "food",
         qty: 1
     },
     {
-        id: 0002,
+        id: "0002",
         name: "chips",
         price: 2.00,
         category: "food",
         qty: 1
     },    
     {
-        id: 0003,
+        id: "0003",
         name: "soda",
         price: 1.00,
         category: "drinks",
         qty: 1
     },
     {
-        id: 0004,
+        id: "0420",
         name: "kusa",
         price: 10.00,
         category: "plant",
         qty: 1
     },
     {
-        id: 0010,
+        id: "0005",
         name: "krazy",
         price: 6.00,
+        category: "dairy",
+        qty: 1
+    },
+    {
+        id: "0010",
+        name: "yes",
+        price: 1.00,
         category: "dairy",
         qty: 1
     }
@@ -47,6 +54,7 @@ const products = [
 
 // onload
 window.addEventListener("DOMContentLoaded", function(){
+    console.log(products)
 
     // getting numpad elements
     let buttons = document.getElementsByClassName("numpad")
@@ -69,6 +77,12 @@ window.addEventListener("DOMContentLoaded", function(){
                 // pushing object to array as current selected item
                 curr = getProduct(code)
                 showProduct(curr)
+            }else if(buttons[i].innerHTML == "add"){
+
+                // pushing object to cart for compilation
+                cart.push(curr)
+                console.log(cart)
+                previewReceipt(cart)
             }else if(isDigit(buttons[i].innerHTML)){
 
                 // updating code(barcode) as user submits input
@@ -89,6 +103,8 @@ window.addEventListener("DOMContentLoaded", function(){
             }else if(keyName == "Enter"){
                 curr = getProduct(code)
                 showProduct(curr)
+            }else if(keyName == "+"){
+                cart.push(curr)
             }
 
             document.getElementById("code").innerHTML = code
@@ -105,6 +121,17 @@ function showProduct(curr){
     document.getElementById("price").innerHTML = "$" + curr.price
     document.getElementById("quantity").innerHTML = curr.qty
     document.getElementById("item-price").innerHTML = "$" + curr.price * curr.qty
+}
+
+function previewReceipt(cart){
+    let target = document.getElementsByClassName("cart-items")
+    let generatedElements = ""
+
+    cart.forEach(element => {
+        generatedElements += `<p>${element.name}</p>`
+    });
+
+    target.innerHTML = generatedElements
 }
 
 function isDigit(char){
