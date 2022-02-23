@@ -69,6 +69,8 @@ window.addEventListener("DOMContentLoaded", function(){
     let cart = []
     let curr
 
+    console.log(products)
+
     for(let i = 0; i < buttons.length; i++){
 
         // click event listener for numpad
@@ -86,9 +88,15 @@ window.addEventListener("DOMContentLoaded", function(){
             }else if(buttons[i].innerHTML == "add"){
 
                 // pushing object to cart for compilation
-                cart.push(curr)
+                if(cart.includes(curr)){
+                    cart[cart.findIndex(i => i.id == curr.id)].qty++
+                    previewReceipt(cart)
+                }else{
+                    cart.push(curr)
+                    previewReceipt(cart)
+                }
+
                 console.log(cart)
-                previewReceipt(cart)
             }else if(isDigit(buttons[i].innerHTML)){
 
                 // updating code(barcode) as user submits input
@@ -104,6 +112,7 @@ window.addEventListener("DOMContentLoaded", function(){
 
         // basic key listener "+" not working atm
         const keyName = event.key
+
         if(isKey(keyName)){
             if(isDigit(keyName)){
                 code = code.concat(keyName)
@@ -113,7 +122,15 @@ window.addEventListener("DOMContentLoaded", function(){
                 curr = getProduct(code)
                 showProduct(curr)
             }else if(keyName == "+"){
-                cart.push(curr)
+                if(cart.includes(curr)){
+                    cart[cart.findIndex(i => i.id == curr.id)].qty++
+                    calcPrice(cart)
+                    previewReceipt(cart)
+                }else{
+                    cart.push(curr)
+                    calcPrice(cart)
+                    previewReceipt(cart)
+                }
             }
 
             document.getElementById("code").innerHTML = code
@@ -128,6 +145,7 @@ function getProduct(code){
 }
 
 function showProduct(curr){
+
     // updating the right display to show current selected item
     document.getElementById("name").innerHTML = curr.name
     document.getElementById("price").innerHTML = "$" + curr.price
@@ -137,16 +155,29 @@ function showProduct(curr){
 
 function previewReceipt(cart){
 
-    // adding html elements to DOM using cart content WIP
     let target = document.getElementById("cart-items")
     let generatedElements = ""
 
     cart.map((data)=> {
-        generatedElements += `${data['name']}`
+        generatedElements += `<p>${data['name']} ${data['price']} ${data['qty']}</p>`
     })
-    
 
-    target.textContent = generatedElements
+    generatedElements += `<h3>Total: $${calcPrice(cart)}</h3>`
+    
+    // adding html elements to container
+    target.innerHTML = generatedElements
+}
+
+function calcPrice(cart){
+    let price = 0
+
+    // looping through cart to calculate price
+    for(let i = 0; i < cart.length; i++){
+        price += cart[i].price * cart[i].qty
+    }
+
+    console.log(price)
+    return price
 }
 
 function isDigit(char){
@@ -175,6 +206,7 @@ function isControl(char){
         || char == "ArrowUp"
         || char == "ArrowDown"
         || char == "Enter"
+        || char == "+"
         ){
             return true
         }
