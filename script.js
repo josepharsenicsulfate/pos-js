@@ -49,19 +49,11 @@ const products = [
         price: 1.00,
         category: "dairy",
         qty: 1
-    },
-    {
-        id: "042069",
-        name: "deez",
-        price: 1.00,
-        category: "nuts",
-        qty: 1
     }
 ]
 
 // onload
 window.addEventListener("DOMContentLoaded", function(){
-
     // getting numpad elements
     let buttons = document.getElementsByClassName("numpad")
     let code = ""
@@ -79,12 +71,12 @@ window.addEventListener("DOMContentLoaded", function(){
                 // deleting last character of string
                 code = code.slice(0, code.length-1)
 
-            }else if(buttons[i].innerHTML == "enter"){
+            }else if(buttons[i].innerHTML == "enter" || buttons[i].innerHTML == "Enter"){
 
                 // pushing object to array as current selected item
                 curr = getProduct(code)
                 showProduct(curr)
-            }else if(buttons[i].innerHTML == "add"){
+            }else if(buttons[i].innerHTML == "add" || buttons[i].innerHTML == "Add"){
 
                 // pushing object to cart for compilation
                 if(cart.includes(curr)){
@@ -107,9 +99,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     document.addEventListener("keydown", (event) => {
 
-        // basic key listener "+" not working atm
         const keyName = event.key
-
+        
         if(isKey(keyName)){
             if(isDigit(keyName)){
                 code = code.concat(keyName)
