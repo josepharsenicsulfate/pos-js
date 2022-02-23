@@ -59,7 +59,7 @@ body .main .container .receipt-preview{
     border-radius: 4px;
     width: 1fr; 
     text-align: center;
-    overflow: hidden;
+    overflow: scroll;
     height: 65vh; 
     background: var(--white-);
     padding: 10px 0;
