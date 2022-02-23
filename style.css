@@ -14,6 +14,11 @@
     color: var(--black-);
 }
 
+body{
+    margin: 0;
+    padding: 0;
+}
+
 .btn{
     outline: none;
     background-color: var(--white-);
@@ -53,10 +58,36 @@ body .main .container .receipt-preview{
     border: 1px solid black;
     border-radius: 4px;
     width: 1fr; 
-    text-align: center; 
-    height: 65vh; 
+    text-align: center;
     overflow: scroll;
+    height: 65vh; 
     background: var(--white-);
+    padding: 10px 0;
+}
+
+body .main .container .receipt-preview h1{
+    font-size: 20px;
+    margin: 5px;
+}
+
+body .main .container .receipt-preview .receipt-detail{
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    padding: 15px; 
+}
+
+body .main .container .receipt-preview .receipt-detail *{
+    font-size: 12px;
+}
+
+body .main .container .receipt-preview .receipt-detail span{
+    font-weight: 600;
+}
+
+body .main .container .receipt-preview #cart-items, body .main .container .receipt-preview #cart-labels{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 body .main .container .input-display{
@@ -80,7 +111,7 @@ body .main .container .input-keypad{
     margin: 15px 0; 
     display: grid; 
     grid-template-columns: repeat(4, 1fr); 
-    grid-template-rows: repeat(5, 1fr); 
+    grid-template-rows: repeat(4, 1fr); 
     gap: 5px
 }
 
@@ -103,6 +134,10 @@ body .main .container .input-keypad{
 
 .input-keypad :nth-child(11), .input-keypad :nth-child(12){
     grid-row: 4;
+}
+
+.input-keypad :nth-child(12){
+    color: var(--green-);
 }
 
 .input-keypad :nth-child(13){

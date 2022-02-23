@@ -65,11 +65,10 @@ window.addEventListener("DOMContentLoaded", function(){
     // getting numpad elements
     let buttons = document.getElementsByClassName("numpad")
     let code = ""
-    let price = 0
     let cart = []
     let curr
 
-    console.log(products)
+    getReceiptDetails()
 
     for(let i = 0; i < buttons.length; i++){
 
@@ -95,8 +94,6 @@ window.addEventListener("DOMContentLoaded", function(){
                     cart.push(curr)
                     previewReceipt(cart)
                 }
-
-                console.log(cart)
             }else if(isDigit(buttons[i].innerHTML)){
 
                 // updating code(barcode) as user submits input
@@ -154,16 +151,19 @@ function showProduct(curr){
 }
 
 function previewReceipt(cart){
-
     let target = document.getElementById("cart-items")
     let generatedElements = ""
+    let price = 0
 
     cart.map((data)=> {
-        generatedElements += `<p>${data['name']} ${data['price']} ${data['qty']}</p>`
+        generatedElements += `<label>${data['name']}</label>
+                                <label>${data['qty']}</label>
+                                <label>$${data['price']*data['qty']}</label>`
+        price += data['price']*data['qty']
     })
 
-    generatedElements += `<h3>Total: $${calcPrice(cart)}</h3>`
-    
+    generatedElements += `<h1 style="grid-column: 3">Total: &nbsp;${price}</h1>`
+
     // adding html elements to container
     target.innerHTML = generatedElements
 }
@@ -175,9 +175,28 @@ function calcPrice(cart){
     for(let i = 0; i < cart.length; i++){
         price += cart[i].price * cart[i].qty
     }
-
-    console.log(price)
     return price
+}
+
+function getReceiptDetails(){
+
+    // getting the current date and time
+    let dateInst = new Date()
+
+    let dateStr = dateInst.getMonth()+1 + "-" + dateInst.getDate().toString() + "-" + dateInst.getFullYear().toString()
+    let timeStr = dateInst.getHours().toString() + ":" + dateInst.getMinutes().toString() + ":" + dateInst.getSeconds().toString()
+
+    // selecting the html elements
+    let dateElement = document.getElementById("date")
+    let timeElement = document.getElementById("time")
+    let cashierElement = document.getElementById("cashier")
+    let receiptElement = document.getElementById("receipt")
+
+    // adding value to selected html elements
+    dateElement.textContent = dateStr
+    timeElement.textContent = timeStr
+    cashierElement.textContent = "John Doe" // static name
+    receiptElement.textContent = Math.floor(Math.random()*1000) // generate random number between 0 - 1000
 }
 
 function isDigit(char){
