@@ -62,7 +62,11 @@ body .main .container .receipt-preview{
     overflow: scroll;
     height: 65vh; 
     background: var(--white-);
-    padding: 10px 0;
+    padding: 10px 10px;
+}
+
+body .main .container .receipt-preview::-webkit-scrollbar {
+    display: none;
 }
 
 body .main .container .receipt-preview h1{

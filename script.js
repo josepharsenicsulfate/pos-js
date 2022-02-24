@@ -149,11 +149,11 @@ function previewReceipt(cart){
     cart.map((data)=> {
         generatedElements += `<label>${data['name']}</label>
                                 <label>${data['qty']}</label>
-                                <label>$${data['price']*data['qty']}</label>`
+                                <label>${data['price']*data['qty']}</label>`
         price += data['price']*data['qty']
     })
 
-    generatedElements += `<h1 style="grid-column: 3">Total: &nbsp;${price}</h1>`
+    generatedElements += `<h1 style="grid-column: 3">Total: &nbsp;$${price}</h1>`
 
     // adding html elements to container
     target.innerHTML = generatedElements
