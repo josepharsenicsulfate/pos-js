@@ -30,24 +30,17 @@ const products = [
         qty: 1
     },
     {
-        id: "0420",
-        name: "kusa",
+        id: "0004",
+        name: "tea",
         price: 10.00,
-        category: "plant",
+        category: "drinks",
         qty: 1
     },
     {
         id: "0005",
-        name: "krazy",
+        name: "milk",
         price: 6.00,
-        category: "dairy",
-        qty: 1
-    },
-    {
-        id: "0010",
-        name: "yes",
-        price: 1.00,
-        category: "dairy",
+        category: "drinks",
         qty: 1
     }
 ]
